@@ -22,6 +22,9 @@ class MainForm : Form
 		// Objects to input
 		//
 		// Invitation label
+
+		int vertical_distance = 20;
+
 		Label input_label = new Label();
 		input_label.Text = "Input string to encrypt/decrypt it:";
 		input_label.Location = new Point(10, 10);
@@ -31,9 +34,9 @@ class MainForm : Form
 
 		// Box for inputting string
 		TextBox usr_input = new TextBox();
-		usr_input.Top = input_label.Top + 20;
+		usr_input.Top = input_label.Top + vertical_distance;
 		usr_input.Left = input_label.Left;
-		usr_input.Size = new Size(this.Width - (input_label.Left * 3), 13);
+		usr_input.Size = new Size(this.Width - (input_label.Left * 3), vertical_distance);
 
 		Controls.Add(usr_input);
 	}
