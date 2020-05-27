@@ -27,9 +27,10 @@ class MainForm : Form
 
 		// Invitation label
 		Label input_label = new Label();
-		input_label.Text = "Input string to encrypt/decrypt it:";
 		input_label.Location = margin;
 		input_label.Size = new Size(this.Width - (margin.X * 3), SYMB_HEIGHT);
+
+		input_label.Text = "Input string to encrypt/decrypt it:";
 
 		Controls.Add(input_label);
 
@@ -46,11 +47,11 @@ class MainForm : Form
 		// Key presence check
 		//
 
-		const int HOR_DIST = 5;
+		const int HOR_DIST = 2;
 
 		// Checkbox for it
 		CheckBox key_check = new CheckBox();
-		key_check.Size = new Size(15, 15);
+		key_check.Size = new Size(SYMB_HEIGHT, SYMB_HEIGHT);
 		key_check.Left = margin.X;
 		key_check.FlatStyle = FlatStyle.Flat;
 		key_check.Top = usr_input.Bottom + VER_DIST;
@@ -83,7 +84,32 @@ class MainForm : Form
 		key_input.Width = this.Width - ((margin.X * 3) + key_input_text.Width + HOR_DIST);
 		key_input.BorderStyle = BorderStyle.FixedSingle;
 
+		key_input.Maximum = 127m;
+
 		Controls.Add(key_input);
+
+		// Invitation to choice
+		Label action_text = new Label();
+		action_text.Left = margin.X;
+		action_text.Top = key_input.Bottom + VER_DIST;
+		action_text.Size = new Size(120, SYMB_HEIGHT);
+		action_text.Text = "What you want to do?:";
+
+		Controls.Add(action_text);
+
+		// Action choice
+		ComboBox actions = new ComboBox();
+		actions.Left = action_text.Right + HOR_DIST;
+		actions.Top = action_text.Top;
+		control_width = this.Width - ((margin.X * 3) + action_text.Width + HOR_DIST);
+		actions.Size = new Size(control_width, SYMB_HEIGHT);
+		actions.DropDownStyle = ComboBoxStyle.DropDownList;
+
+		actions.Items.Add("Encrypt");
+		actions.Items.Add("Decrypt");
+		actions.SelectedIndex = 0;
+
+		Controls.Add(actions);
 
 		//
 		// Output field
@@ -91,7 +117,7 @@ class MainForm : Form
 
 		// Result label
 		Label result_text = new Label();
-		result_text.Top = key_input.Bottom + VER_DIST;
+		result_text.Top = action_text.Bottom + VER_DIST;
 		result_text.Left = margin.X;
 		control_width = this.Width - (margin.X * 3);
 		result_text.Size = new Size(control_width, SYMB_HEIGHT);
@@ -105,9 +131,22 @@ class MainForm : Form
 		result.Left = margin.X;
 		result.Width = this.Width - (margin.X * 3);
 		result.ReadOnly = true;
+		result.BorderStyle = BorderStyle.FixedSingle;
 
 		Controls.Add(result);
 
 		this.Size = new Size(input_label.Right + (margin.X * 2), result.Bottom + (margin.Y * 2) + result.Height);
+
+		//
+		// Buttons
+		//
+
+		// Next key button
+		Button next_key = new Button();
+
+		next_key.Left = margin.X;
+		next_key.Top = result.Bottom + VER_DIST;
+
+
 	}
 }
