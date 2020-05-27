@@ -27,6 +27,7 @@ class MainForm : Form
 
 		// Invitation label
 		Label input_label = new Label();
+
 		input_label.Location = margin;
 
 		input_label.Size = new Size(this.Width - (margin.X * 3), SYMB_HEIGHT);
@@ -37,6 +38,7 @@ class MainForm : Form
 
 		// Box for inputting string
 		TextBox usr_input = new TextBox();
+
 		usr_input.Top = input_label.Bottom + VER_DIST;
 		usr_input.Left = margin.X;
 
@@ -53,6 +55,7 @@ class MainForm : Form
 
 		// Checkbox for it
 		CheckBox key_check = new CheckBox();
+
 		key_check.Top = usr_input.Bottom + VER_DIST;
 		key_check.Left = margin.X;
 
@@ -63,6 +66,7 @@ class MainForm : Form
 
 		// Text for key presence check
 		Label key_presence_label = new Label();
+
 		key_presence_label.Top = key_check.Top;
 		key_presence_label.Left = key_check.Right + HOR_DIST;
 
@@ -75,6 +79,7 @@ class MainForm : Form
 
 		// Text for key input
 		Label key_input_text = new Label();
+
 		key_input_text.Top = key_check.Bottom + VER_DIST;
 		key_input_text.Left = margin.X;
 
@@ -86,6 +91,7 @@ class MainForm : Form
 
 		// Input box for key
 		NumericUpDown key_input = new NumericUpDown();
+
 		key_input.Top = key_check.Bottom + VER_DIST;
 		key_input.Left = key_input_text.Right + HOR_DIST;
 
@@ -98,6 +104,7 @@ class MainForm : Form
 
 		// Invitation to choice
 		Label action_text = new Label();
+
 		action_text.Top = key_input.Bottom + VER_DIST;
 		action_text.Left = margin.X;
 
@@ -109,6 +116,7 @@ class MainForm : Form
 
 		// Action choice
 		ComboBox actions = new ComboBox();
+
 		actions.Top = action_text.Top;
 		actions.Left = action_text.Right + HOR_DIST;
 
@@ -128,6 +136,7 @@ class MainForm : Form
 
 		// Result label
 		Label result_text = new Label();
+
 		result_text.Top = action_text.Bottom + VER_DIST;
 		result_text.Left = margin.X;
 
@@ -140,6 +149,7 @@ class MainForm : Form
 
 		// Disabled text box with output
 		TextBox result = new TextBox();
+
 		result.Top = result_text.Bottom + VER_DIST;
 		result.Left = margin.X;
 
@@ -149,8 +159,6 @@ class MainForm : Form
 
 		Controls.Add(result);
 
-		this.Size = new Size(input_label.Right + (margin.X * 2), result.Bottom + (margin.Y * 2) + result.Height);
-
 		//
 		// Buttons
 		//
@@ -158,8 +166,27 @@ class MainForm : Form
 		// Next key button
 		Button next_key = new Button();
 
-		next_key.Left = margin.X;
 		next_key.Top = result.Bottom + VER_DIST;
+		next_key.Left = margin.X;
 
+		next_key.Width = this.Width - (margin.X * 3);
+
+		next_key.Text = "Try next key >>";
+
+		Controls.Add(next_key);
+
+		// Previous key button
+		Button prev_key = new Button();
+
+		prev_key.Top = next_key.Bottom + VER_DIST;
+		prev_key.Left = margin.X;
+
+		prev_key.Width = this.Width - (margin.X * 3);
+
+		prev_key.Text = "<< Previous key";
+
+		Controls.Add(prev_key);
+
+		this.Size = new Size(input_label.Right + (margin.X * 2), prev_key.Bottom + (margin.Y * 2) + prev_key.Height);
 	}
 }
