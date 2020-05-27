@@ -9,8 +9,8 @@ class MainForm : Form
 		//
 		// Window size and style
 		//
+		Point margin = new Point(10, 10);
 		FormBorderStyle = FormBorderStyle.FixedSingle;
-		Size = new Size(300, 300);
 
 		//
 		// Header of the program
@@ -24,13 +24,12 @@ class MainForm : Form
 
 		const int VER_DIST = 3;
 		const int SYMB_HEIGHT = 13;
-		Point margin = new Point(10, 10);
 
 		// Invitation label
 		Label input_label = new Label();
 		input_label.Text = "Input string to encrypt/decrypt it:";
 		input_label.Location = margin;
-		input_label.Size = new Size(this.Width - (input_label.Left * 3), SYMB_HEIGHT);
+		input_label.Size = new Size(this.Width - (margin.X * 3), SYMB_HEIGHT);
 
 		Controls.Add(input_label);
 
@@ -85,5 +84,30 @@ class MainForm : Form
 		key_input.BorderStyle = BorderStyle.FixedSingle;
 
 		Controls.Add(key_input);
+
+		//
+		// Output field
+		//
+
+		// Result label
+		Label result_text = new Label();
+		result_text.Top = key_input.Bottom + VER_DIST;
+		result_text.Left = margin.X;
+		control_width = this.Width - (margin.X * 3);
+		result_text.Size = new Size(control_width, SYMB_HEIGHT);
+		result_text.Text = "Result:";
+
+		Controls.Add(result_text);
+
+		// Disabled text box with output
+		TextBox result = new TextBox();
+		result.Top = result_text.Bottom + VER_DIST;
+		result.Left = margin.X;
+		result.Width = this.Width - (margin.X * 3);
+		result.ReadOnly = true;
+
+		Controls.Add(result);
+
+		this.Size = new Size(input_label.Right + (margin.X * 2), result.Bottom + (margin.Y * 2) + result.Height);
 	}
 }
