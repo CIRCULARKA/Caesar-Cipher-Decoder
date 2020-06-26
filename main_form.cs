@@ -4,6 +4,8 @@ using System.Drawing;
 // Class that represents main window of the program
 class MainForm : Form
 {
+	Cryptographer result_string;
+
 	Point margin;
 
 	Label input_label;
@@ -21,6 +23,17 @@ class MainForm : Form
 
 	NumericUpDown key_input;
 
+	void ChangeOutput(object s, System.EventArgs e)
+	{
+		result_string = new Cryptographer(usr_input.Text, (int)key_input.Value);
+
+		// If combo box is on "Encrypt"
+		if (actions.SelectedIndex == 0)
+			result.Text = result_string.Encrypt();
+		// If on "Decrypt"
+		else
+			result.Text = result_string.Decrypt();
+	}
 
 	public MainForm()
 	{
@@ -161,7 +174,6 @@ class MainForm : Form
 		next_key.Width = this.Width - (margin.X * 3);
 
 		next_key.Text = "Try next key >>";
-		next_key.Enabled = false;
 
 		Controls.Add(next_key);
 
@@ -174,7 +186,6 @@ class MainForm : Form
 		prev_key.Width = this.Width - (margin.X * 3);
 
 		prev_key.Text = "<< Previous key";
-		prev_key.Enabled = false;
 
 		Controls.Add(prev_key);
 
@@ -185,18 +196,12 @@ class MainForm : Form
 		//
 
 		// Displaying result of encrypting/dectypting when user enters text in usr_input
-		usr_input.TextChanged += UserInputChanged;
-	}
-	
-	void UserInputChanged(object s, System.EventArgs e)
-	{
-		Cryptographer result_string = new Cryptographer(usr_input.Text, (int)key_input.Value);
+		usr_input.TextChanged += ChangeOutput;
 
-		// If combo box is on "Encrypt"
-		if (actions.SelectedIndex == 0)
-			result.Text = result_string.Encrypt();
-		// If on "Decrypt"
-		else
-			result.Text = result_string.Decrypt();
+		// Changes output text when key changed
+		key_input.ValueChanged += ChangeOutput;
+
+		// Changes output when action changed
+		actions.SelectedIndexChanged += ChangeOutput;
 	}
 }
