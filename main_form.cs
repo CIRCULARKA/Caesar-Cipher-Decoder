@@ -13,8 +13,6 @@ class MainForm : Form
 	Label action_text;
 	Label result_text;
 
-	Button next_key;
-	Button prev_key;
 
 	TextBox usr_input;
 	TextBox result;
@@ -161,35 +159,7 @@ class MainForm : Form
 
 		Controls.Add(result);
 
-		//
-		// Buttons
-		//
-
-		// Next key button
-		next_key = new Button();
-
-		next_key.Top = result.Bottom + VER_DIST;
-		next_key.Left = margin.X;
-
-		next_key.Width = this.Width - (margin.X * 3);
-
-		next_key.Text = "Try next key >>";
-
-		Controls.Add(next_key);
-
-		// Previous key button
-		prev_key = new Button();
-
-		prev_key.Top = next_key.Bottom + VER_DIST;
-		prev_key.Left = margin.X;
-
-		prev_key.Width = this.Width - (margin.X * 3);
-
-		prev_key.Text = "<< Previous key";
-
-		Controls.Add(prev_key);
-
-		this.Size = new Size(input_label.Right + (margin.X * 2), prev_key.Bottom + (margin.Y * 2) + prev_key.Height);
+		this.Size = new Size(input_label.Right + (margin.X * 2), result.Bottom + (margin.Y * 2) + result.Height);
 
 		//
 		// Triggers
