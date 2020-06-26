@@ -222,7 +222,7 @@ class MainForm : Form
 		key_check.CheckedChanged += KeyPresenceChanged;
 
 		// Displaying result of encrypting/dectypting when user enters text in usr_input
-		// usr_input.TextChanged += UserInputChanged;
+		usr_input.TextChanged += UserInputChanged;
 	}
 
 	void KeyPresenceChanged(object s, System.EventArgs e)
@@ -231,5 +231,17 @@ class MainForm : Form
 
 		next_key.Enabled = !next_key.Enabled;
 		prev_key.Enabled = !prev_key.Enabled;
+	}
+
+	void UserInputChanged(object s, System.EventArgs e)
+	{
+		Cryptographer result_string = new Cryptographer(usr_input.Text, (int)key_input.Value);
+
+		// If combo box is on "Encrypt"
+		if (actions.SelectedIndex == 0)
+			result.Text = result_string.Encrypt();
+		// If on "Decrypt"
+		else
+			result.Text = result_string.Decrypt();
 	}
 }
