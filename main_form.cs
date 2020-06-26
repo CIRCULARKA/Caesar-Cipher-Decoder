@@ -120,6 +120,7 @@ class MainForm : Form
 		key_input.BorderStyle = BorderStyle.FixedSingle;
 
 		key_input.Maximum = 127m;
+		key_input.Enabled = false;
 
 		Controls.Add(key_input);
 
@@ -193,6 +194,7 @@ class MainForm : Form
 		next_key.Width = this.Width - (margin.X * 3);
 
 		next_key.Text = "Try next key >>";
+		next_key.Enabled = false;
 
 		Controls.Add(next_key);
 
@@ -205,6 +207,7 @@ class MainForm : Form
 		prev_key.Width = this.Width - (margin.X * 3);
 
 		prev_key.Text = "<< Previous key";
+		prev_key.Enabled = false;
 
 		Controls.Add(prev_key);
 
@@ -213,5 +216,20 @@ class MainForm : Form
 		//
 		// Triggers
 		//
+
+		// Input key field must be disabled when checkbox above it is unchecked
+		// The same is for buttons for key guessing
+		key_check.CheckedChanged += KeyPresenceChanged;
+
+		// Displaying result of encrypting/dectypting when user enters text in usr_input
+		// usr_input.TextChanged += UserInputChanged;
+	}
+
+	void KeyPresenceChanged(object s, System.EventArgs e)
+	{
+		key_input.Enabled = !key_input.Enabled;
+
+		next_key.Enabled = !next_key.Enabled;
+		prev_key.Enabled = !prev_key.Enabled;
 	}
 }
